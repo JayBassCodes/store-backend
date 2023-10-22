@@ -23,26 +23,34 @@ router.get('/:id', async(req, res) => {
   const categoryData = await Category.findByPk(req.params.id, {
     include: [{ model: Product }],
   });
+  res.status(200).json(categoryData);
   }
   catch (err) {
     res.status(500).json(err);
   }});
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
-  Category.create({
-    category_name: req.body.category_name,
-  })
+  try {
+    const categoryData = await Category.create({
+      name: req.body.name,
+    });
+    res.status(200).json(categoryData);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    const categoryData = await Category.update(req.body, {
+    await Category.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
+    res.status(200).json({ message: 'Category updated successfully' });
   }
   catch (err) {
     res.status(500).json(err);
@@ -57,6 +65,7 @@ router.delete('/:id', async (req, res) => {
       id: req.params.id,
     },
   });
+  res.status(200).json({ message: 'Category deleted successfully' });
   }
   catch (err) {
     res.status(500).json(err);

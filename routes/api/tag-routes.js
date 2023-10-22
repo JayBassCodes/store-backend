@@ -32,7 +32,7 @@ catch (err) {
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
-    tag_name: req.body.tag_name,
+    name: req.body.name,
   })
 });
 
@@ -44,6 +44,7 @@ router.put('/:id', async (req, res) => {
       id: req.params.id,
     },
   });
+  res.status(200).json(tagData);
   }
   catch (err) {
     res.status(500).json(err);
