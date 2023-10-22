@@ -1,6 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-
-const sequelize = require('../config/connection.js');
+const { Model, DataTypes } = require ('sequelize');
+const sequelize = require('../config/connection');
 
 class Category extends Model {}
 
@@ -23,7 +22,8 @@ Category.init(
       // String
       type: DataTypes.STRING,
       // Doesn't allow null values
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'Shirt'
     }
   },
   {

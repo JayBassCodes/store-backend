@@ -22,7 +22,8 @@ Tag.init(
       // String
       type: DataTypes.STRING,
       // Doesn't allow null values
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'tagDefault'
     }
 
   },
